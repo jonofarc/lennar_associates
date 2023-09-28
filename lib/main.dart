@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:lennar_associates/login/presentation/pages/login_screen.dart';
 import 'package:lennar_associates/shared/utils/app_utils.dart';
 import 'package:lennar_associates/shared/utils/constants.dart';
+import 'package:lennar_associates/generated/l10n.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'package:flutter/material.dart';
+import 'dart:ui';
 
 void main() {
   runApp(const MyApp());
@@ -21,6 +26,14 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(title: appName),
+      supportedLocales: S.delegate.supportedLocales,
+      locale: View.of(context).platformDispatcher.locale,
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate, // Add this delegate
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate, // Add this delegate
+      ],
     );
   }
 }

@@ -1,10 +1,10 @@
 {
-  "@@locale": "en",
-  "userName": "User Name",
+  "@@locale": "es-MX",
+  "userName": "Usuario",
   "@userName": {
     "description": "User Login text"
   },
-  "password": "Password",
+  "password": "Contraseña",
   "@userLogin": {
     "description": "Password text"
   }
