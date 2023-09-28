@@ -11,5 +11,9 @@
   "login": "Inicio de sesión",
   "@login": {
     "description": "inicio de sesión"
+  },
+  "loginError": "Error de inicio de sesion. Por favor verifique su nombre de usuario y contraseña y vuelva a intentarlo.",
+  "@loginError": {
+    "description": "Login error text"
   }
 }

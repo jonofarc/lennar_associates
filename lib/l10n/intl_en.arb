@@ -11,5 +11,9 @@
   "login": "Login",
   "@login": {
     "description": "Login text"
+  },
+  "loginError": "Login failed. Please check your username and password and try again.",
+  "@loginError": {
+    "description": "Login error text"
   }
 }

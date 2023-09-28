@@ -34,6 +34,12 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
   @override
   Widget build(BuildContext context) {
     final s = S();
+    var borderColor = widget.error
+        ? const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red),
+          )
+        : const OutlineInputBorder();
+
     return Padding(
       padding: const EdgeInsets.only(
         left: paddingDefault,
@@ -51,6 +57,7 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
             controller: _userNameTextController,
             decoration: InputDecoration(
               labelText: s.userName,
+              enabledBorder: borderColor,
               border: const OutlineInputBorder(),
             ),
           ),
@@ -59,8 +66,10 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
           ),
           TextField(
             controller: _passwordTextController,
+            obscureText: true,
             decoration: InputDecoration(
               labelText: s.password,
+              enabledBorder: borderColor,
               border: const OutlineInputBorder(),
             ),
           ),
@@ -74,6 +83,7 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
               width: 300.0, // Set the button width to 300 pixels
               child: ElevatedButton(
                 onPressed: () {
+                  FocusScope.of(context).unfocus();
                   BlocProvider.of<LoginBloc>(context).add(LoginSubmit(
                       _userNameTextController.text,
                       _passwordTextController.text));
@@ -82,6 +92,17 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
               ),
             ),
           ],
+          const SizedBox(
+            height: paddingDefault,
+          ),
+          if (widget.error)
+            Text(
+              s.loginError,
+              style: const TextStyle(
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
         ],
       ),
     );

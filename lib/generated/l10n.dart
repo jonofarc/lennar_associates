@@ -79,6 +79,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Login failed. Please check your username and password and try again.`
+  String get loginError {
+    return Intl.message(
+      'Login failed. Please check your username and password and try again.',
+      name: 'loginError',
+      desc: 'Login error text',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

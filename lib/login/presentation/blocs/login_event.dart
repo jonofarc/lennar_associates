@@ -12,7 +12,3 @@ class LoginSubmit extends LoginEvent {
     this.password,
   );
 }
-
-class CheckCmsContentState extends LoginEvent {
-  CheckCmsContentState();
-}
