@@ -7,5 +7,9 @@
   "password": "Contraseña",
   "@userLogin": {
     "description": "Password text"
+  },
+  "login": "Inicio de sesión",
+  "@login": {
+    "description": "inicio de sesión"
   }
 }

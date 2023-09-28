@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lennar_associates/login/presentation/blocs/login_bloc.dart';
 import 'package:lennar_associates/login/presentation/pages/login_view_mobile.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({
@@ -8,10 +10,31 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget layout = Container();
+    return BlocProvider(
+      create: (context) => LoginBloc(),
+      child: _content(),
+    );
+  }
 
-    //here is where diferent screens could be passed depending on criteria such as mobile or desktop sizes
-
-    return const LoginViewMobile();
+  Widget _content() {
+    return BlocBuilder<LoginBloc, LoginState>(
+      builder: (blocContext, state) {
+        if (state is LoginSuccess) {
+          //update to redirect to main view
+          return const LoginViewMobile();
+        } else if (state is LoginLoading) {
+          return const LoginViewMobile(
+            loading: true,
+          );
+        } else if (state is LoginError) {
+          return const LoginViewMobile(
+            error: true,
+          );
+        } else {
+          return const LoginViewMobile();
+        }
+        return Container();
+      },
+    );
   }
 }

@@ -7,5 +7,9 @@
   "password": "Password",
   "@userLogin": {
     "description": "Password text"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Login text"
   }
 }
