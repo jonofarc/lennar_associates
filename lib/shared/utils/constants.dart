@@ -4,6 +4,7 @@ const paddingDefault = 16.0;
 
 //login base url
 const loginBaseUrl = "https://j21dy.wiremockapi.cloud/";
+const picsumBaseUrl = "https://picsum.photos/v2/list";
 
 //Error messages
 const String badRequestError = 'Bad Request';

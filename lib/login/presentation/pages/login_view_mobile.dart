@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lennar_associates/generated/l10n.dart';
+import 'package:lennar_associates/home/presentation/pages/home_screen.dart';
 import 'package:lennar_associates/login/presentation/blocs/login_bloc.dart';
 import 'package:lennar_associates/shared/utils/app_text_style.dart';
 import 'package:lennar_associates/shared/utils/constants.dart';
@@ -32,7 +33,7 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext buildContext) {
     final s = S();
     var borderColor = widget.error
         ? const OutlineInputBorder(
@@ -84,6 +85,7 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
               child: ElevatedButton(
                 onPressed: () {
                   FocusScope.of(context).unfocus();
+
                   BlocProvider.of<LoginBloc>(context).add(LoginSubmit(
                       _userNameTextController.text,
                       _passwordTextController.text));

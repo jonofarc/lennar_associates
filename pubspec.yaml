@@ -43,6 +43,9 @@ dependencies:
   equatable: ^2.0.5
   dartz: ^0.10.1
   intl: ^0.18.1
+  build_runner:
+  json_annotation:
+  json_serializable:
 
 
   # The following adds the Cupertino Icons font to your application.
