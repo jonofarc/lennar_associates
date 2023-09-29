@@ -45,7 +45,6 @@ class HomeScreen extends StatelessWidget {
   }
 
   _fetchContent(BuildContext blocContext) {
-    BlocProvider.of<HomeBloc>(blocContext)
-        .add(LoadHomeContent(getHomeContent: GetHomeContent()));
+    BlocProvider.of<HomeBloc>(blocContext).add(LoadHomeContent());
   }
 }

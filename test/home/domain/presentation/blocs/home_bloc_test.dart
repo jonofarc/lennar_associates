@@ -3,13 +3,11 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:lennar_associates/home/data/models/photo.dart';
 import 'package:lennar_associates/home/data/models/photos.dart';
 import 'package:lennar_associates/home/domain/usecases/get_home_content.dart';
 import 'package:lennar_associates/home/presentation/blocs/home_bloc.dart';
-import 'package:lennar_associates/login/domain/repositories/login_repository.dart';
-import 'package:lennar_associates/login/domain/usecases/login_submit.dart';
-import 'package:lennar_associates/login/presentation/blocs/login_bloc.dart';
 import 'package:lennar_associates/shared/network/failures.dart';
 import 'package:mockito/mockito.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -20,6 +18,12 @@ import 'home_bloc_test.mocks.dart';
 @GenerateMocks([GetHomeContent])
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  late MockGetHomeContent mockGetHomeContent = MockGetHomeContent();
+
+  setUpAll(() async {
+    final serviceLocator = GetIt.instance;
+    serviceLocator.registerFactory<GetHomeContent>(() => mockGetHomeContent);
+  });
 
   const Photos photos = Photos(photoList: [
     Photo(
@@ -32,8 +36,6 @@ void main() {
   ]);
 
   group('HomeBloc', () {
-    late MockGetHomeContent mockGetHomeContent = MockGetHomeContent();
-
     blocTest<HomeBloc, HomeState>(
       'emits [LoginLoading, LoginSuccess] when LoginSubmit is added successfully',
       build: () {
@@ -44,7 +46,7 @@ void main() {
         return homeBloc;
       },
       act: (bloc) {
-        bloc.add(LoadHomeContent(getHomeContent: mockGetHomeContent));
+        bloc.add(LoadHomeContent());
       },
       expect: () => [const HomeLoading(), const HomeSuccess(photos: photos)],
     );
@@ -59,7 +61,7 @@ void main() {
         return homeBloc;
       },
       act: (bloc) {
-        bloc.add(LoadHomeContent(getHomeContent: mockGetHomeContent));
+        bloc.add(LoadHomeContent());
       },
       expect: () => [
         const HomeLoading(),

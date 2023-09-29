@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lennar_associates/login/presentation/pages/login_screen.dart';
+import 'package:lennar_associates/shared/injectable_init.dart';
 import 'package:lennar_associates/shared/widgets/widget_utils.dart';
 import 'package:lennar_associates/shared/utils/constants.dart';
 import 'package:lennar_associates/generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'package:flutter/material.dart';
-import 'dart:ui';
-
 void main() {
+  initServiceLocator();
   runApp(const MyApp());
 }
 
