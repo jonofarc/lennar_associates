@@ -23,8 +23,8 @@ class WidgetUtils {
         color: Colors.white,
       ),
       backgroundColor: Theme.of(context).colorScheme.primary,
-      title:
-          Text(appName, style: AppTextStyle.large.withColor(defaultTextColor)),
+      title: Text(appName,
+          style: AppTextStyle.headingH2.withColor(defaultTextColor)),
       actions: [_logoutButton(defaultTextColor, context)],
       automaticallyImplyLeading: false,
     );
