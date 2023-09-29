@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lennar_associates/generated/l10n.dart';
 import 'package:lennar_associates/shared/shared_preferences/local_storage.dart';
 import 'package:lennar_associates/shared/shared_preferences/local_storage_key.dart';
-import 'package:lennar_associates/shared/utils/app_text_style.dart';
-
-import '../utils/constants.dart';
 
 class AppUtils {
   // do all the cleaning and logic needed for a logout

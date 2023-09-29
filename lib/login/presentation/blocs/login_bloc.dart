@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:flutter/material.dart';
 import 'package:lennar_associates/login/domain/usecases/login_submit.dart';
+import 'package:lennar_associates/shared/injectable_init.dart';
 import 'package:lennar_associates/shared/utils/app_utils.dart';
 import 'package:lennar_associates/shared/utils/log.dart';
 
@@ -17,6 +17,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   void _onLoginSubmit(LoginSubmit event, Emitter<LoginState> emit) async {
+    final postLoginSubmit = serviceLocator<PostLoginSubmit>();
     try {
       if (state is LoginLoading) {
         Log.debug("$runtimeType attempted to fetch data while loading");
@@ -26,8 +27,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(const LoginLoading());
       Log.debug("Attempting to login");
 
-      final result = await event.postLoginSubmit
-          .execute(username: event.userName, password: event.password);
+      final result = await postLoginSubmit.execute(
+          username: event.userName, password: event.password);
       final appUtils = AppUtils();
 
       result.fold((error) {

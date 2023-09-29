@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:lennar_associates/login/domain/repositories/login_repository.dart';
+import 'package:get_it/get_it.dart';
 import 'package:lennar_associates/login/domain/usecases/login_submit.dart';
 import 'package:lennar_associates/login/presentation/blocs/login_bloc.dart';
 import 'package:lennar_associates/shared/network/failures.dart';
@@ -16,10 +16,14 @@ import 'login_bloc_test.mocks.dart';
 @GenerateMocks([PostLoginSubmit])
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  late MockPostLoginSubmit mockPostLoginSubmit = MockPostLoginSubmit();
+
+  setUpAll(() async {
+    final serviceLocator = GetIt.instance;
+    serviceLocator.registerFactory<PostLoginSubmit>(() => mockPostLoginSubmit);
+  });
 
   group('LoginBloc', () {
-    late MockPostLoginSubmit mockPostLoginSubmit = MockPostLoginSubmit();
-
     blocTest<LoginBloc, LoginState>(
       'emits [LoginLoading, LoginSuccess] when LoginSubmit is added successfully',
       build: () {
@@ -32,9 +36,9 @@ void main() {
       },
       act: (bloc) {
         bloc.add(LoginSubmit(
-            userName: 'test',
-            password: 'password',
-            postLoginSubmit: mockPostLoginSubmit));
+          userName: 'test',
+          password: 'password',
+        ));
       },
       expect: () => [const LoginLoading(), const LoginSuccess()],
     );
@@ -51,9 +55,9 @@ void main() {
         return loginBloc;
       },
       act: (bloc) => bloc.add(LoginSubmit(
-          userName: 'test',
-          password: 'password',
-          postLoginSubmit: mockPostLoginSubmit)),
+        userName: 'test',
+        password: 'password',
+      )),
       expect: () => [
         const LoginLoading(),
         const LoginError(
