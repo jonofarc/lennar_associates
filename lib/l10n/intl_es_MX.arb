@@ -15,5 +15,9 @@
   "loginError": "Error de inicio de sesion. Por favor verifique su nombre de usuario y contraseña y vuelva a intentarlo.",
   "@loginError": {
     "description": "Login error text"
+  },
+  "logout": "Cerrar sesión",
+  "@logout": {
+    "description": "Logout error text"
   }
 }

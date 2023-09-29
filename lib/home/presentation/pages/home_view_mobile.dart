@@ -32,24 +32,16 @@ class _HomeViewMobileState extends State<HomeViewMobile> {
 
   @override
   Widget build(BuildContext context) {
-    final s = S();
-    var url2 = "https://picsum.photos/200/300?random=1";
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: paddingDefault,
-        right: paddingDefault,
-      ),
-      child: Column(
-        children: [
-          if (widget.photos.photoList.isNotEmpty) ...[
-            Expanded(
-              child: PhotosWidget(
-                photos: widget.photos,
-              ),
-            )
-          ]
-        ],
-      ),
+    return Column(
+      children: [
+        if (widget.photos.photoList.isNotEmpty) ...[
+          Expanded(
+            child: PhotosWidget(
+              photos: widget.photos,
+            ),
+          ),
+        ]
+      ],
     );
   }
 }

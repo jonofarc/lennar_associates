@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _content(BuildContext buildContext) {
     return Scaffold(
-      appBar: AppUtils().getDefaultAppbar(buildContext),
+      appBar: AppUtils().getLogOutAppbar(buildContext),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (blocContext, state) {
           if (state is HomeSuccess) {

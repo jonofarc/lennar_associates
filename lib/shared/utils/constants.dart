@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 /// File to store constants used on through the app.
 const appName = "Lennar Associates";
 const paddingDefault = 16.0;
@@ -14,3 +16,5 @@ const String unknownError = 'Unknown Error';
 const String networkError = 'Internet is not available';
 const String nullResponse = 'Null response';
 const String tryAgainError = 'Something went wrong try again!';
+
+const defaultTextColor = Colors.white;

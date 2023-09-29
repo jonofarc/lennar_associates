@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginError": MessageLookupByLibrary.simpleMessage(
             "Login failed. Please check your username and password and try again."),
+        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "userName": MessageLookupByLibrary.simpleMessage("User Name")
       };

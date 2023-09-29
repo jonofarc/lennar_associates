@@ -18,13 +18,10 @@ class PhotosWidget extends StatelessWidget {
     return ListView.builder(
       itemCount: photos.photoList.length,
       itemBuilder: (BuildContext context, int index) {
-        return Padding(
-          padding: const EdgeInsets.only(top: paddingDefault),
-          child: PhotoWidget(
-            url: photos.photoList[index].url,
-            downloadUrl: photos.photoList[index].downloadUrl,
-            author: photos.photoList[index].author,
-          ),
+        return PhotoWidget(
+          url: photos.photoList[index].url,
+          downloadUrl: photos.photoList[index].downloadUrl,
+          author: photos.photoList[index].author,
         );
       },
     );

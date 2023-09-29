@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lennar_associates/shared/utils/constants.dart';
 import 'package:shimmer/shimmer.dart';
 
 class LoadingWidget extends StatelessWidget {
@@ -33,7 +34,7 @@ class LoadingWidget extends StatelessWidget {
           child: Container(
             width: width,
             height: height,
-            color: Colors.white,
+            color: defaultTextColor,
           ),
         ));
   }

@@ -39,15 +39,15 @@ class GenericErrorWidget extends StatelessWidget {
             const SizedBox(height: paddingDefault), // Add spacing
             Text(
               tryAgainError,
-              style: AppTextStyle.large.withColor(Colors.white),
+              style: AppTextStyle.large.withColor(defaultTextColor),
             ),
             const SizedBox(height: paddingDefault), // Add spacing
             Padding(
-              padding: EdgeInsets.all(paddingDefault),
+              padding: const EdgeInsets.all(paddingDefault),
               child: Text(
                 textAlign: TextAlign.center,
                 message,
-                style: AppTextStyle.small.withColor(Colors.white),
+                style: AppTextStyle.small.withColor(defaultTextColor),
               ),
             ),
           ],
