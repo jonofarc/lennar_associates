@@ -7,8 +7,8 @@ class LoginSubmit extends LoginEvent {
   final String userName;
   final String password;
 
-  LoginSubmit(
-    this.userName,
-    this.password,
-  );
+  LoginSubmit({
+    required this.userName,
+    required this.password,
+  });
 }

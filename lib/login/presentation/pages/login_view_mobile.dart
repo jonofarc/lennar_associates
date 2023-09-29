@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lennar_associates/generated/l10n.dart';
 import 'package:lennar_associates/home/presentation/pages/home_screen.dart';
 import 'package:lennar_associates/login/presentation/blocs/login_bloc.dart';
+import 'package:lennar_associates/shared/shared_preferences/local_storage.dart';
+import 'package:lennar_associates/shared/shared_preferences/local_storage_key.dart';
 import 'package:lennar_associates/shared/utils/app_text_style.dart';
 import 'package:lennar_associates/shared/utils/constants.dart';
+import 'package:lennar_associates/shared/utils/log.dart';
 
 class LoginViewMobile extends StatefulWidget {
   const LoginViewMobile({
@@ -29,6 +32,46 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
     _userNameTextController.dispose();
     _passwordTextController.dispose();
     super.dispose();
+  }
+
+  /*
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      var storedUsername =
+          await LocalStorage().getString(LocalStorageKey.storedUsername);
+      var storedPassword =
+          await LocalStorage().getString(LocalStorageKey.storedPassword);
+
+      if (storedUsername != null && storedPassword != null) {
+        Log.debug("Attempting login with saved user name and password");
+        loginSubmit(userName: storedUsername, password: storedPassword);
+      }
+    });
+  }
+
+   */
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      var storedUsername =
+          await LocalStorage().getString(LocalStorageKey.storedUsername);
+      var storedPassword =
+          await LocalStorage().getString(LocalStorageKey.storedPassword);
+
+      if (storedUsername != null && storedPassword != null) {
+        Log.debug("Attempting login with saved user name and password");
+        _userNameTextController.text = storedUsername;
+        _passwordTextController.text = storedPassword;
+
+        loginSubmit(userName: storedUsername, password: storedPassword);
+      }
+    });
   }
 
   @override
@@ -83,11 +126,9 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
               width: 300.0, // Set the button width to 300 pixels
               child: ElevatedButton(
                 onPressed: () {
-                  FocusScope.of(context).unfocus();
-
-                  BlocProvider.of<LoginBloc>(context).add(LoginSubmit(
-                      _userNameTextController.text,
-                      _passwordTextController.text));
+                  loginSubmit(
+                      userName: _userNameTextController.text,
+                      password: _passwordTextController.text);
                 },
                 child: Text(s.login),
               ),
@@ -107,5 +148,12 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
         ],
       ),
     );
+  }
+
+  loginSubmit({required String userName, required String password}) {
+    FocusScope.of(context).unfocus();
+
+    BlocProvider.of<LoginBloc>(context)
+        .add(LoginSubmit(userName: userName, password: password));
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lennar_associates/login/presentation/pages/login_screen.dart';
-import 'package:lennar_associates/shared/utils/app_utils.dart';
+import 'package:lennar_associates/shared/widgets/widget_utils.dart';
 import 'package:lennar_associates/shared/utils/constants.dart';
 import 'package:lennar_associates/generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppUtils().getDefaultAppbar(context),
+      appBar: WidgetUtils().getDefaultAppbar(context),
       body: const Center(
         child: LoginScreen(),
         // This trailing comma makes auto-formatting nicer for build methods.

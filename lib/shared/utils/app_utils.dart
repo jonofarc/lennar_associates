@@ -1,48 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:lennar_associates/generated/l10n.dart';
+import 'package:lennar_associates/shared/shared_preferences/local_storage.dart';
+import 'package:lennar_associates/shared/shared_preferences/local_storage_key.dart';
 import 'package:lennar_associates/shared/utils/app_text_style.dart';
 
-import 'constants.dart';
+import '../utils/constants.dart';
 
 class AppUtils {
-  AppBar getDefaultAppbar(BuildContext context) {
-    return AppBar(
-      iconTheme: const IconThemeData(
-        color: Colors.white,
-      ),
-      backgroundColor: Theme.of(context).colorScheme.primary,
-      title: Text(appName,
-          style: AppTextStyle.headingH2.withColor(defaultTextColor)),
-    );
+  // do all the cleaning and logic needed for a logout
+  Future<void> doLogout(BuildContext context) async {
+    Navigator.of(context).pop();
+    clearCredentials();
   }
 
-  AppBar getLogOutAppbar(BuildContext context) {
-    return AppBar(
-      iconTheme: const IconThemeData(
-        color: Colors.white,
-      ),
-      backgroundColor: Theme.of(context).colorScheme.primary,
-      title:
-          Text(appName, style: AppTextStyle.large.withColor(defaultTextColor)),
-      actions: [_cancelButton(defaultTextColor)],
-    );
+  Future<void> storeCredentials(
+      {required String userName, required String password}) async {
+    final localStorage = LocalStorage();
+    localStorage.setString(userName,
+        localStorageKey: LocalStorageKey.storedUsername);
+    localStorage.setString(password,
+        localStorageKey: LocalStorageKey.storedPassword);
   }
 
-  Widget _cancelButton(Color color) {
-    final s = S();
-    return Container(
-      padding: const EdgeInsets.only(
-        right: 16.0,
-      ),
-      child: TextButton(
-        onPressed: () {
-          print("Log out pressed");
-        },
-        child: Text(
-          s.logout,
-          style: AppTextStyle.button.withColor(color),
-        ),
-      ),
-    );
+  Future<void> clearCredentials() async {
+    final localStorage = LocalStorage();
+    localStorage.remove(localStorageKey: LocalStorageKey.storedUsername);
+    localStorage.remove(localStorageKey: LocalStorageKey.storedPassword);
   }
 }

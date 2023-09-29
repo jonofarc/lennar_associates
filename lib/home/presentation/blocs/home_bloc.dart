@@ -24,7 +24,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       }
 
       emit(const HomeLoading());
-      Log.debug("Attempting to login");
+      Log.debug("fetching home content");
 
       final result = await GetHomeContent().execute();
 

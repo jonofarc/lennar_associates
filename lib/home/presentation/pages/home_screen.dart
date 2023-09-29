@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lennar_associates/home/presentation/blocs/home_bloc.dart';
 import 'package:lennar_associates/home/presentation/pages/home_view_mobile.dart';
-import 'package:lennar_associates/login/presentation/blocs/login_bloc.dart';
-import 'package:lennar_associates/login/presentation/pages/login_view_mobile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lennar_associates/shared/utils/app_utils.dart';
 import 'package:lennar_associates/shared/widgets/loading_widget.dart';
+import 'package:lennar_associates/shared/widgets/widget_utils.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -22,7 +20,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _content(BuildContext buildContext) {
     return Scaffold(
-      appBar: AppUtils().getLogOutAppbar(buildContext),
+      appBar: WidgetUtils().getLogOutAppbar(buildContext),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (blocContext, state) {
           if (state is HomeSuccess) {

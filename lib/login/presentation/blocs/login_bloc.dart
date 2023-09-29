@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:lennar_associates/login/domain/usecases/login_submit.dart';
+import 'package:lennar_associates/shared/utils/app_utils.dart';
 import 'package:lennar_associates/shared/utils/log.dart';
 
 part 'login_event.dart';
@@ -26,11 +27,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final result = await PostLoginSubmit()
           .execute(username: event.userName, password: event.password);
 
-      // emit(const LoginSuccess());
+      final appUtils = AppUtils();
 
       result.fold((error) {
+        //an error occurred clear stored credentials
+        appUtils.clearCredentials();
         emit(LoginError(message: error.message));
-      }, (toolsCollectionItem) => emit(const LoginSuccess()));
+      }, (toolsCollectionItem) {
+        //store credentials on successful login
+        appUtils.storeCredentials(
+            userName: event.userName, password: event.password);
+        emit(const LoginSuccess());
+      });
     } catch (e) {
       Log.debug(e.toString());
       emit(LoginError(message: e.toString()));

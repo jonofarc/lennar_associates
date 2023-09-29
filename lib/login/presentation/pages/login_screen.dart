@@ -3,6 +3,8 @@ import 'package:lennar_associates/home/presentation/pages/home_screen.dart';
 import 'package:lennar_associates/login/presentation/blocs/login_bloc.dart';
 import 'package:lennar_associates/login/presentation/pages/login_view_mobile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lennar_associates/shared/shared_preferences/local_storage.dart';
+import 'package:lennar_associates/shared/shared_preferences/local_storage_key.dart';
 import 'package:lennar_associates/shared/widgets/loading_widget.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -21,10 +23,6 @@ class LoginScreen extends StatelessWidget {
   Widget _content() {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (blocContext, state) {
-        //remove this to reenable loginscreen
-
-        _loginSuccess(context: blocContext);
-
         if (state is LoginSuccess) {
           _loginSuccess(context: blocContext);
 
