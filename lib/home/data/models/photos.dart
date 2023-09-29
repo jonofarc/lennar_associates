@@ -3,10 +3,10 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:lennar_associates/home/data/models/photo.dart';
 
 @JsonSerializable()
-class Photos {
+class Photos extends Equatable {
   final List<Photo> photoList;
 
-  Photos({required this.photoList});
+  const Photos({required this.photoList});
 
   factory Photos.fromJson(List<dynamic> json) {
     List<Photo> photos = [];
@@ -15,4 +15,7 @@ class Photos {
     }
     return Photos(photoList: photos);
   }
+
+  @override
+  List<Object?> get props => [photoList];
 }

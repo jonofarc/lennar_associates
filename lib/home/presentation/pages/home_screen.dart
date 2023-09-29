@@ -5,6 +5,7 @@ import 'package:lennar_associates/login/presentation/blocs/login_bloc.dart';
 import 'package:lennar_associates/login/presentation/pages/login_view_mobile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lennar_associates/shared/utils/app_utils.dart';
+import 'package:lennar_associates/shared/widgets/loading_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -25,9 +26,12 @@ class HomeScreen extends StatelessWidget {
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (blocContext, state) {
           if (state is HomeSuccess) {
-            return const HomeViewMobile();
+            return HomeViewMobile(
+              photos: state.photos,
+            );
           } else if (state is HomeLoading) {
-            return const HomeViewMobile();
+            return const LoadingWidget(
+                width: double.infinity, height: double.infinity);
           } else if (state is HomeError) {
             return const HomeViewMobile();
           } else if (state is HomeInitialState) {
@@ -42,7 +46,6 @@ class HomeScreen extends StatelessWidget {
   }
 
   _fetchContent(BuildContext blocContext) {
-    print("!!!!!!!!!");
-    BlocProvider.of<HomeBloc>(blocContext).add(LoadHomeContent("", ""));
+    BlocProvider.of<HomeBloc>(blocContext).add(LoadHomeContent());
   }
 }

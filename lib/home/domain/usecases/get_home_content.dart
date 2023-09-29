@@ -7,8 +7,7 @@ import 'package:lennar_associates/shared/network/failures.dart';
 class GetHomeContent {
   GetHomeContent();
 
-  Future<Either<ServerFailure, Photos>> execute(
-      {required String username, required String password}) async {
+  Future<Either<ServerFailure, Photos>> execute() async {
     return await HomeContentRepository().fetchContent();
   }
 }

@@ -14,11 +14,11 @@ class HomeLoading extends HomeState {
 }
 
 class HomeSuccess extends HomeState {
-  const HomeSuccess();
+  final Photos photos;
+  const HomeSuccess({required this.photos});
 }
 
 class HomeError extends HomeState {
   final String message;
-
   const HomeError({required this.message});
 }

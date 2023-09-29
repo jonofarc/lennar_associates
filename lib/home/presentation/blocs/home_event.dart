@@ -4,11 +4,5 @@ part of 'home_bloc.dart';
 abstract class HomeEvent {}
 
 class LoadHomeContent extends HomeEvent {
-  final String userName;
-  final String password;
-
-  LoadHomeContent(
-    this.userName,
-    this.password,
-  );
+  LoadHomeContent();
 }

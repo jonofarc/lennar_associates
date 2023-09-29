@@ -22,8 +22,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
       emit(const LoginLoading());
       Log.debug("Attempting to login");
-      //simulate login wait
-      await Future.delayed(const Duration(seconds: 3));
 
       final result = await PostLoginSubmit()
           .execute(username: event.userName, password: event.password);

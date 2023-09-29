@@ -9,14 +9,13 @@ import 'package:lennar_associates/shared/utils/constants.dart';
 class LoginViewMobile extends StatefulWidget {
   const LoginViewMobile({
     super.key,
-    this.error = false,
     this.loading = false,
     this.errorMessage = "",
   });
 
-  final bool error;
   final bool loading;
   final String errorMessage;
+
   @override
   _LoginViewMobileState createState() => _LoginViewMobileState();
 }
@@ -35,7 +34,7 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
   @override
   Widget build(BuildContext buildContext) {
     final s = S();
-    var borderColor = widget.error
+    var borderColor = widget.errorMessage.isNotEmpty
         ? const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.red),
           )
@@ -97,7 +96,7 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
           const SizedBox(
             height: paddingDefault,
           ),
-          if (widget.error)
+          if (widget.errorMessage.isNotEmpty)
             Text(
               s.loginError,
               style: const TextStyle(

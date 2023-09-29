@@ -34,8 +34,8 @@ class LoginScreen extends StatelessWidget {
             loading: true,
           );
         } else if (state is LoginError) {
-          return const LoginViewMobile(
-            error: true,
+          return LoginViewMobile(
+            errorMessage: state.message,
           );
         } else {
           return const LoginViewMobile();
