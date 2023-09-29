@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lennar_associates/generated/l10n.dart';
 import 'package:lennar_associates/home/presentation/pages/home_screen.dart';
+import 'package:lennar_associates/login/domain/usecases/credentials_validation.dart';
 import 'package:lennar_associates/login/presentation/blocs/login_bloc.dart';
 import 'package:lennar_associates/shared/shared_preferences/local_storage.dart';
 import 'package:lennar_associates/shared/shared_preferences/local_storage_key.dart';
@@ -26,6 +27,7 @@ class LoginViewMobile extends StatefulWidget {
 class _LoginViewMobileState extends State<LoginViewMobile> {
   final TextEditingController _userNameTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
+  var loginEnabled = false;
 
   @override
   void dispose() {
@@ -34,29 +36,16 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
     super.dispose();
   }
 
-  /*
   @override
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      var storedUsername =
-          await LocalStorage().getString(LocalStorageKey.storedUsername);
-      var storedPassword =
-          await LocalStorage().getString(LocalStorageKey.storedPassword);
-
-      if (storedUsername != null && storedPassword != null) {
-        Log.debug("Attempting login with saved user name and password");
-        loginSubmit(userName: storedUsername, password: storedPassword);
-      }
+    _userNameTextController.addListener(() {
+      loginEnableCheck();
     });
-  }
-
-   */
-
-  @override
-  void initState() {
-    super.initState();
+    _passwordTextController.addListener(() {
+      loginEnableCheck();
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       var storedUsername =
@@ -69,7 +58,7 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
         _userNameTextController.text = storedUsername;
         _passwordTextController.text = storedPassword;
 
-        loginSubmit(userName: storedUsername, password: storedPassword);
+        _loginSubmit(userName: storedUsername, password: storedPassword);
       }
     });
   }
@@ -125,11 +114,13 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
             SizedBox(
               width: 300.0, // Set the button width to 300 pixels
               child: ElevatedButton(
-                onPressed: () {
-                  loginSubmit(
-                      userName: _userNameTextController.text,
-                      password: _passwordTextController.text);
-                },
+                onPressed: loginEnabled
+                    ? () {
+                        _loginSubmit(
+                            userName: _userNameTextController.text,
+                            password: _passwordTextController.text);
+                      }
+                    : null,
                 child: Text(s.login),
               ),
             ),
@@ -150,10 +141,36 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
     );
   }
 
-  loginSubmit({required String userName, required String password}) {
+  _loginSubmit({required String userName, required String password}) {
     FocusScope.of(context).unfocus();
 
     BlocProvider.of<LoginBloc>(context)
         .add(LoginSubmit(userName: userName, password: password));
+  }
+
+  /*
+  this function could be refactor  on a more compact way such as
+
+  void loginEnableCheck() {
+    final credentialValidation = CredentialValidation();
+    setState(() {
+      loginEnabled = credentialValidation.validatePassword(
+          password: _passwordTextController.text) && credentialValidation.validateUserName(
+          username: _userNameTextController.text);
+    });
+  }
+
+  but separating the validation results makes it more readable and less obfuscated
+   */
+
+  void loginEnableCheck() {
+    final credentialValidation = CredentialValidation();
+    var passwordValid = credentialValidation.validatePassword(
+        password: _passwordTextController.text);
+    var userNameValid = credentialValidation.validateUserName(
+        username: _userNameTextController.text);
+    setState(() {
+      loginEnabled = passwordValid && userNameValid;
+    });
   }
 }
