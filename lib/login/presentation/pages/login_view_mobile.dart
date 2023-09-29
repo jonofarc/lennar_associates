@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lennar_associates/generated/l10n.dart';
 import 'package:lennar_associates/home/presentation/pages/home_screen.dart';
 import 'package:lennar_associates/login/domain/usecases/credentials_validation.dart';
+import 'package:lennar_associates/login/domain/usecases/login_submit.dart';
 import 'package:lennar_associates/login/presentation/blocs/login_bloc.dart';
 import 'package:lennar_associates/shared/shared_preferences/local_storage.dart';
 import 'package:lennar_associates/shared/shared_preferences/local_storage_key.dart';
@@ -144,8 +145,10 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
   _loginSubmit({required String userName, required String password}) {
     FocusScope.of(context).unfocus();
 
-    BlocProvider.of<LoginBloc>(context)
-        .add(LoginSubmit(userName: userName, password: password));
+    BlocProvider.of<LoginBloc>(context).add(LoginSubmit(
+        userName: userName,
+        password: password,
+        postLoginSubmit: PostLoginSubmit()));
   }
 
   /*

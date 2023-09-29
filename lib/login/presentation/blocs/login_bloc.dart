@@ -25,12 +25,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
       emit(const LoginLoading());
       Log.debug("Attempting to login");
-      print("4444444444444");
+
       final result = await event.postLoginSubmit
           .execute(username: event.userName, password: event.password);
-
-      // final result = Right(true);
-      print("66666666666");
       final appUtils = AppUtils();
 
       result.fold((error) {
