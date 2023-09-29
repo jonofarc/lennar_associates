@@ -1,37 +1,56 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:lennar_associates/shared/widgets/widget_utils.dart';
+import 'package:lennar_associates/shared/shared_preferences/local_storage.dart';
+import 'package:lennar_associates/shared/shared_preferences/local_storage_key.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:lennar_associates/shared/utils/app_utils.dart';
 
 class MockBuildContext extends Mock implements BuildContext {}
 
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 
+class MockLocalStorage extends Mock {}
+
 void main() {
-  group('WidgetUtils', () {
-    final widgetUtils = WidgetUtils();
-    final BuildContext context =
-        MockBuildContext(); // Create a mock context for testing
+  WidgetsFlutterBinding.ensureInitialized();
+  final SharedPreferences sharedPreferences = MockSharedPreferences();
 
-    test('getDefaultAppbar', () {
-      final appBar = widgetUtils.getDefaultAppbar(context);
+  final localStorage = LocalStorage();
+  const userName = 'testUser';
+  const password = 'testPassword';
 
-      expect(appBar, isA<AppBar>());
-      expect(appBar.backgroundColor,
-          equals(Theme.of(context).colorScheme.primary));
-      expect(appBar.title, isA<Text>());
-    });
+  setUpAll(() {
+    SharedPreferences.setMockInitialValues(
+        {LocalStorageKey.storedUsername: userName});
+    SharedPreferences.setMockInitialValues(
+        {LocalStorageKey.storedPassword: password});
 
-    test('getLogOutAppbar', () {
-      final appBar = widgetUtils.getLogOutAppbar(context);
+    when(sharedPreferences.getString(LocalStorageKey.storedUsername))
+        .thenReturn(userName);
+    when(sharedPreferences.getString(LocalStorageKey.storedPassword))
+        .thenReturn(password);
+  });
 
-      expect(appBar, isA<AppBar>());
-      expect(appBar.backgroundColor,
-          equals(Theme.of(context).colorScheme.primary));
-      expect(appBar.title, isA<Text>());
-      expect(appBar.actions, isA<List<Widget>>());
-      expect(appBar.automaticallyImplyLeading, equals(false));
-    });
+  test('storeCredentials - successful', () async {
+    final appUtils = AppUtils();
+    await appUtils.storeCredentials(userName: userName, password: password);
+    final result = await localStorage.getString(LocalStorageKey.storedUsername);
+    expect(result, userName);
+  });
+
+  test('clearCredentials - successful', () async {
+    // Arrange
+    final appUtils = AppUtils();
+
+    // Act
+    await appUtils.clearCredentials();
+
+    final storedUserName =
+        await localStorage.getString(LocalStorageKey.storedUsername);
+    final storedUserPassword =
+        await localStorage.getString(LocalStorageKey.storedUsername);
+    expect(storedUserName, null);
+    expect(storedUserPassword, null);
   });
 }
