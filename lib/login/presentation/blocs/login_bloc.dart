@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
+import 'package:equatable/equatable.dart';
 
 import 'package:flutter/material.dart';
 import 'package:lennar_associates/login/domain/usecases/login_submit.dart';
@@ -23,10 +25,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
       emit(const LoginLoading());
       Log.debug("Attempting to login");
-
-      final result = await PostLoginSubmit()
+      print("4444444444444");
+      final result = await event.postLoginSubmit
           .execute(username: event.userName, password: event.password);
 
+      // final result = Right(true);
+      print("66666666666");
       final appUtils = AppUtils();
 
       result.fold((error) {

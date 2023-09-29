@@ -1,8 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:lennar_associates/login/domain/repositories/login_repository.dart';
 import 'package:lennar_associates/shared/network/failures.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
 //Class name could be renamed to something more appropiate
+
 class PostLoginSubmit {
   PostLoginSubmit();
 
