@@ -2,8 +2,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:lennar_associates/shared/widgets/widget_utils.dart';
 import 'package:mockito/mockito.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MockBuildContext extends Mock implements BuildContext {}
+
+class MockSharedPreferences extends Mock implements SharedPreferences {}
 
 void main() {
   group('WidgetUtils', () {
