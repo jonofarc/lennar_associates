@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lennar_associates/home/domain/usecases/get_home_content.dart';
 import 'package:lennar_associates/home/presentation/blocs/home_bloc.dart';
 import 'package:lennar_associates/home/presentation/pages/home_view_mobile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,6 +45,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   _fetchContent(BuildContext blocContext) {
-    BlocProvider.of<HomeBloc>(blocContext).add(LoadHomeContent());
+    BlocProvider.of<HomeBloc>(blocContext)
+        .add(LoadHomeContent(getHomeContent: GetHomeContent()));
   }
 }

@@ -13,7 +13,7 @@ import 'package:mockito/annotations.dart';
 
 import 'login_bloc_test.mocks.dart';
 
-@GenerateMocks([LoginRepository, PostLoginSubmit])
+@GenerateMocks([PostLoginSubmit])
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 
 import 'package:flutter/material.dart';
 import 'package:lennar_associates/home/data/models/photos.dart';
@@ -26,7 +27,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(const HomeLoading());
       Log.debug("fetching home content");
 
-      final result = await GetHomeContent().execute();
+      final result = await event.getHomeContent.execute();
 
       result.fold((error) {
         emit(HomeError(message: error.message));
