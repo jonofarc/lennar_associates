@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lennar_associates/generated/l10n.dart';
 import 'package:lennar_associates/login/domain/usecases/credentials_validation.dart';
 import 'package:lennar_associates/login/presentation/blocs/login_bloc.dart';
+import 'package:lennar_associates/shared/injectable_init.dart';
 import 'package:lennar_associates/shared/shared_preferences/local_storage.dart';
 import 'package:lennar_associates/shared/shared_preferences/local_storage_key.dart';
 import 'package:lennar_associates/shared/utils/constants.dart';
@@ -63,7 +64,7 @@ class _LoginViewMobileState extends State<LoginViewMobile> {
 
   @override
   Widget build(BuildContext buildContext) {
-    final s = S();
+    final s = serviceLocator<S>();
     var borderColor = widget.errorMessage.isNotEmpty
         ? const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.red),

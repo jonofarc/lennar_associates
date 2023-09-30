@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lennar_associates/generated/l10n.dart';
+import 'package:lennar_associates/shared/injectable_init.dart';
 import 'package:lennar_associates/shared/utils/app_text_style.dart';
 import 'package:lennar_associates/shared/utils/app_utils.dart';
 
@@ -31,7 +32,7 @@ class WidgetUtils {
   }
 
   Widget _logoutButton(Color color, BuildContext context) {
-    final s = S();
+    final s = serviceLocator<S>();
     return Container(
       padding: const EdgeInsets.only(
         right: 16.0,
