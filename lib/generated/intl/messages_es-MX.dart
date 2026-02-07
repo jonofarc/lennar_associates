@@ -22,11 +22,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "login": MessageLookupByLibrary.simpleMessage("Inicio de sesión"),
-        "loginError": MessageLookupByLibrary.simpleMessage(
-            "Error de inicio de sesion. Por favor verifique su nombre de usuario y contraseña y vuelva a intentarlo."),
-        "logout": MessageLookupByLibrary.simpleMessage("Cerrar sesión"),
-        "password": MessageLookupByLibrary.simpleMessage("Contraseña"),
-        "userName": MessageLookupByLibrary.simpleMessage("Usuario")
-      };
+    "login": MessageLookupByLibrary.simpleMessage("Inicio de sesión"),
+    "loginError": MessageLookupByLibrary.simpleMessage(
+      "Error de inicio de sesion. Por favor verifique su nombre de usuario y contraseña y vuelva a intentarlo.",
+    ),
+    "logout": MessageLookupByLibrary.simpleMessage("Cerrar sesión"),
+    "password": MessageLookupByLibrary.simpleMessage("Contraseña"),
+    "userName": MessageLookupByLibrary.simpleMessage("Usuario"),
+  };
 }

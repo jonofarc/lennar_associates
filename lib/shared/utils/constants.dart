@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 /// File to store constants used on through the app.
-const appName = "Lennar Associates";
+const appName = "Unsplash viewer";
 const paddingDefault = 16.0;
 
 //login base url
 const loginBaseUrl = "https://j21dy.wiremockapi.cloud/";
-const picsumBaseUrl = "https://picsum.photos/v2/list";
+const picsumBaseUrl = "https://picsum.photos/v2/list?limit=400";
 
 //Error messages
 const String badRequestError = 'Bad Request';
