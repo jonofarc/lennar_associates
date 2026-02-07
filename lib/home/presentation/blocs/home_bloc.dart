@@ -33,7 +33,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
       result.fold((error) {
         emit(HomeError(message: error.message));
-      }, (photos) => emit(HomeSuccess(photos: photos)));
+      }, (photos) => emit(HomeSuccess(photos: photos.shuffle())));
     } catch (e) {
       Log.debug(e.toString());
       emit(HomeError(message: e.toString()));
